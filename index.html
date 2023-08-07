@@ -5,26 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simon says</title>
-    <link rel="stylesheet" href="estilos.css" />
+    <link rel="stylesheet" href="css/reset.css"> 
+    <link rel="stylesheet" href="css/estilos.css">
+
 </head>
 
 <body>
+
+    <div id="inicio">
+        <div>
+            <h1>Simon Dice</h1>
+        </div>
+        <form name="formulario">
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="centrado">
+                <button type="submit">Comenzar</button>
+            </div>
+        </form>
+    </div>
+
     <div id="pagina">
         <div class="juego">
             <div class="juego-fila">
-                <div id="button-color-1" class="button-color"></div>
-                <div id="button-color-2" class="button-color"></div>
+                <div id="boton-color-1" class="boton-color"></div>
+                <div id="boton-color-2" class="boton-color"></div>
             </div>
             <div class="juego-fila">
-                <div id="button-color-3" class="button-color"></div>
-                <div id="button-color-4" class="button-color"></div>
+                <div id="boton-color-3" class="boton-color"></div>
+                <div id="boton-color-4" class="boton-color"></div>
             </div>
-            <div>
-                <input id="volver" type="button" value="Volver"/>
-            </div>
+
         </div>
     </div>
-    <script src="scripts.js"></script>
+
+    <footer>
+        <div>
+            <ul>
+                <li><a href="https://github.com/florenciamontini" target="_blank">Github</a></li>
+                <li><a href="html/contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>

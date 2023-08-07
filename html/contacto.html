@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css"> 
+    <link rel="stylesheet" href="../css/estilos.css" />
+        <title>Contacto</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="contenido-contacto">
+            <h1>Contact us</h1>
+            <form action="mailto:flor_montini@hotmail.com" method="post" enctype="text/plain">
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Escribir mensaje"
+                        required></textarea>
+                </div>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
