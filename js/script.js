@@ -47,7 +47,7 @@ nombre.addEventListener("input", function (event) {
 
 function empezarJuego() {
     secuencia = [];
-    puntaje.innerText =puntajeJugador;
+    puntaje.innerText = puntajeJugador;
     turnoMaquina();
 }
 
@@ -71,7 +71,6 @@ function empezarSeleccionarColor(pasoSecuencia) {
         limpiarSecuenciaActual();
         if (pasoSecuencia === secuencia.length) {
             agregarPasoASecuencia();
-
             hoverPasoSecuencia(pasoSecuencia);
 
             playerStep = 0;
@@ -83,7 +82,6 @@ function empezarSeleccionarColor(pasoSecuencia) {
         }
         else {
             hoverPasoSecuencia(pasoSecuencia);
-
             empezarSeleccionarColor(pasoSecuencia + 1);
         }
     }, 1000);
@@ -100,7 +98,7 @@ function limpiarSecuenciaActual() {
 function agregarPasoASecuencia() {
     var max = 4;
     var min = 1;
-    var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min);
+    var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min);//random entre 4 nums(colores)
 
     secuencia.push(nuevoPaso);
 }
@@ -123,8 +121,7 @@ function validarPasoJugador(evento) {
     var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
 
     if (secuencia[pasoJugador] !== botonPresionado) {
-
-        //mostrar modal
+        // TODO: mostrar modal
         return;
     }
 
@@ -132,7 +129,7 @@ function validarPasoJugador(evento) {
         modoJugador = false;
         // acumulador puntaje usuario
         puntajeJugador = puntajeJugador + 10;
-        puntaje.innerText=puntajeJugador.toString();
+        puntaje.innerText = puntajeJugador.toString();
 
         turnoMaquina();
         return;
