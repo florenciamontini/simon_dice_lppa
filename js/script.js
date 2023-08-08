@@ -26,9 +26,9 @@ function mouseUp(event) {
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
     if (!formulario.checkValidity()) { //valida si el form es correcto
-        event.preventDefault();
+        event.preventDefault(); //interrumpe el comportamiento del evento que se está ejecutando
     } else {
-        formulario.reset();
+        formulario.reset();//reset del input
         empezarJuego();
     }
 });
@@ -65,7 +65,6 @@ function limpiarSeleccionJugador() {
 function empezarSeleccionarColor(pasoSecuencia){
     setTimeout(function () {
         limpiarSecuenciaActual();
-        //check if it´s final step
         if (pasoSecuencia === secuencia.length) {
             agregarPasoASecuencia();
 

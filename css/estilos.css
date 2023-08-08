@@ -31,7 +31,7 @@ body {
     width: 120px;
 }
 
-#pagina .juego .juego-fila div.modo-jugador:hover {
+#pagina .juego .juego-fila div.modo-jugador:hover { /*modo jugador de tipo hover, permite pintar de color rojo alrededor del boton*/
     border-color: #ff0000;
 }
 
