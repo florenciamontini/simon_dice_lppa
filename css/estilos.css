@@ -31,8 +31,8 @@ body {
     width: 120px;
 }
 
-#pagina .juego .juego-fila div.player-mode:hover {
-    border-color: yellow;
+#pagina .juego .juego-fila div.modo-jugador:hover {
+    border-color: #ff0000;
 }
 
 #pagina .juego div#boton-color-1 {
@@ -87,3 +87,4 @@ footer div {
     font-size: medium;
     font-weight: bolder;
 }
+
