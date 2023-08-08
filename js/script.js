@@ -10,6 +10,9 @@ botonesSimon.forEach((botones) => {
 var modoJugador = false;
 var timerTurno = null;
 var pasoJugador = 0;
+var puntajeJugador = 0;
+var puntaje = document.getElementById("puntaje");
+
 
 function clickeo(event) {
     validarPasoJugador(event);
@@ -42,12 +45,13 @@ nombre.addEventListener("input", function (event) {
     }
 });
 
-function empezarJuego(){
+function empezarJuego() {
     secuencia = [];
-    turnoMaquina();    
+    puntaje.innerText =puntajeJugador;
+    turnoMaquina();
 }
 
-function turnoMaquina(){ 
+function turnoMaquina() {
     limpiarSeleccionJugador();
     setTimeout(function () {
         empezarSeleccionarColor(0);
@@ -62,7 +66,7 @@ function limpiarSeleccionJugador() {
     }
 }
 
-function empezarSeleccionarColor(pasoSecuencia){
+function empezarSeleccionarColor(pasoSecuencia) {
     setTimeout(function () {
         limpiarSecuenciaActual();
         if (pasoSecuencia === secuencia.length) {
@@ -119,17 +123,16 @@ function validarPasoJugador(evento) {
     var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
 
     if (secuencia[pasoJugador] !== botonPresionado) {
-        
+
         //mostrar modal
         return;
     }
 
     if (pasoJugador === secuencia.length - 1) {
         modoJugador = false;
-
-        //player score update
-        //playerScore = playerScore + 10;
-        //score.innerText = playerScore.toString();
+        // acumulador puntaje usuario
+        puntajeJugador = puntajeJugador + 10;
+        puntaje.innerText=puntajeJugador.toString();
 
         turnoMaquina();
         return;
