@@ -1,8 +1,9 @@
-//Formulario de contacto
-const nombreContacto = document.getElementById("nombreContacto");
-const email = document.getElementById("email");
-const mensaje = document.getElementById("mensaje");
+"use strict";
 
+// Formulario de contacto
+var nombreContacto = document.getElementById("nombreContacto");
+var email = document.getElementById("email");
+var mensaje = document.getElementById("mensaje");
 
 // validacion formulario de contacto
 email.addEventListener("input", function (event) {
@@ -35,14 +36,19 @@ mensaje.addEventListener("input", function (event) {
 
 nombreContacto.addEventListener("input", function (event) {
 	console.log(nombreContacto.value);
-	if (nombreContacto.value.length >= 3 && esAlfanumerico(nombreContacto.value))  {
+	if (
+		nombreContacto.value.length >= 3 &&
+		esAlfanumerico(nombreContacto.value)
+	) {
 		nombreContacto.setCustomValidity("");
 	} else {
-		nombreContacto.setCustomValidity("El nombre debe contener al menos tres letras y ser alfanumérico");
+		nombreContacto.setCustomValidity(
+			"El nombre debe contener al menos tres letras y ser alfanumérico"
+		);
 	}
 });
 
 function esAlfanumerico(inputValue) {
-    var regex = /^[a-zA-Z0-9]+$/;
-    return regex.test(inputValue);
+	var regex = /^[a-zA-Z0-9]+$/;
+	return regex.test(inputValue);
 }

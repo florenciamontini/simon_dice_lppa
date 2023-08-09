@@ -1,8 +1,9 @@
+"use strict";
 var secuencia = [];
-const nombre = document.getElementById("nombre");
-const formulario = document.querySelector("form");
-const botonesSimon = document.querySelectorAll(".boton-color");
-botonesSimon.forEach((botones) => {
+var nombre = document.getElementById("nombre");
+var formulario = document.querySelector("form");
+var botonesSimon = document.querySelectorAll(".boton-color");
+botonesSimon.forEach(function (botones) {
 	botones.addEventListener("click", clickeo);
 	botones.addEventListener("mousedown", mouseDown);
 	botones.addEventListener("mouseup", mouseUp);
@@ -12,11 +13,9 @@ var timerTurno = null;
 var pasoJugador = 0;
 var puntajeJugador = 0;
 var puntaje = document.getElementById("puntaje");
-// modal
-const cerrarModal = document.getElementById("cerrarModal");
-const seguirJugando = document.getElementById("seguirJugando");
-const modal = document.getElementById("miModal");
-
+var cerrarModal = document.getElementById("cerrarModal");
+var seguirJugando = document.getElementById("seguirJugando");
+var modal = document.getElementById("miModal");
 
 function clickeo(event) {
 	validarPasoJugador(event);
@@ -33,10 +32,9 @@ function mouseUp(event) {
 formulario.addEventListener("submit", function (event) {
 	event.preventDefault();
 	if (!formulario.checkValidity()) {
-		//valida si el form es correcto
-		event.preventDefault(); //interrumpe el comportamiento del evento que se está ejecutando
+		event.preventDefault();
 	} else {
-		formulario.reset(); //reset del input
+		formulario.reset();
 		empezarJuego();
 	}
 });
@@ -65,8 +63,7 @@ function turnoMaquina() {
 
 function limpiarSeleccionJugador() {
 	var botones = document.getElementsByClassName("boton-color");
-
-	for (let index = 0; index < botones.length; index++) {
+	for (var index = 0; index < botones.length; index++) {
 		botones[index].classList.remove("modo-jugador");
 	}
 }
@@ -77,10 +74,8 @@ function empezarSeleccionarColor(pasoSecuencia) {
 		if (pasoSecuencia === secuencia.length) {
 			agregarPasoASecuencia();
 			hoverPasoSecuencia(pasoSecuencia);
-
 			pasoJugador = 0;
-
-			setTimeout(() => {
+			setTimeout(function () {
 				limpiarSecuenciaActual();
 				turnoJugador();
 			}, 1000);
@@ -93,8 +88,7 @@ function empezarSeleccionarColor(pasoSecuencia) {
 
 function limpiarSecuenciaActual() {
 	var botones = document.getElementsByClassName("boton-color");
-
-	for (let index = 0; index < botones.length; index++) {
+	for (var index = 0; index < botones.length; index++) {
 		botones[index].classList.remove("activo");
 	}
 }
@@ -102,8 +96,7 @@ function limpiarSecuenciaActual() {
 function agregarPasoASecuencia() {
 	var max = 4;
 	var min = 1;
-	var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min); //random entre 4 nums(colores)
-
+	var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min);
 	secuencia.push(nuevoPaso);
 }
 
@@ -111,8 +104,7 @@ function hoverPasoSecuencia(pasoSecuencia) {
 	document
 		.getElementById("boton-color-" + secuencia[pasoSecuencia])
 		.classList.add("activo");
-
-	setTimeout(() => {
+	setTimeout(function () {
 		limpiarSecuenciaActual();
 	}, 500);
 }
@@ -121,41 +113,29 @@ function validarPasoJugador(evento) {
 	if (!modoJugador) {
 		return;
 	}
-
 	clearTimeout(timerTurno);
-
 	var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
-
 	if (secuencia[pasoJugador] !== botonPresionado) {
-		// TODO: mostrar modal
 		abrirModal();
 		return;
 	}
-
 	if (pasoJugador === secuencia.length - 1) {
 		modoJugador = false;
-		// acumulador puntaje usuario
-		puntajeJugador = puntajeJugador + 10;
+		puntajeJugador = puntajeJugador + 100;
 		puntaje.innerText = puntajeJugador.toString();
-
 		turnoMaquina();
 		return;
 	}
-
 	pasoJugador = pasoJugador + 1;
 	turnoJugador();
 }
 
 function turnoJugador() {
-	// pongo estilos del modo jugador
 	var botones = document.getElementsByClassName("boton-color");
-
-	for (let index = 0; index < botones.length; index++) {
+	for (var index = 0; index < botones.length; index++) {
 		botones[index].classList.add("modo-jugador");
 	}
-
 	clearTimeout(timerTurno);
-
 	modoJugador = true;
 }
 
@@ -163,11 +143,9 @@ function botonPresionado(evento) {
 	if (!modoJugador) {
 		return;
 	}
-
 	evento.target.classList.add("activo");
 }
 
-// Cerrar el modal
 cerrarModal.addEventListener("click", function () {
 	modal.style.display = "none";
 	secuencia = [];
@@ -185,7 +163,5 @@ function abrirModal() {
 	puntajeJugador = 0;
 	puntaje.innerText = puntajeJugador.toString();
 	clearTimeout(timerTurno);
-
 	modal.style.display = "block";
 }
-
