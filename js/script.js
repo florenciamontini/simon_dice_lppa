@@ -17,6 +17,7 @@ const cerrarModal = document.getElementById("cerrarModal");
 const seguirJugando = document.getElementById("seguirJugando");
 const modal = document.getElementById("miModal");
 
+
 function clickeo(event) {
 	validarPasoJugador(event);
 }
@@ -187,3 +188,4 @@ function abrirModal() {
 
 	modal.style.display = "block";
 }
+
