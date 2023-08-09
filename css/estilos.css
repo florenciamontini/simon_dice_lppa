@@ -96,15 +96,18 @@ footer div {
 	color: #ffffff;
 }
 .contenedor {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
 }
 .contenido-contacto {
-	max-width: 800px;
-	padding: 20px;
-	box-shadow: 0 0 10px #0000001a;
+    max-width: 800px;
+    padding: 20px;
+    box-shadow: 0 0 10px #0000001a;
+}
+.contenido-contacto label{
+	display: block;
 }
 #inicio h1 {
 	font-size: 40px;
