@@ -133,3 +133,22 @@ footer div {
 	font-size: 40px;
 }
 
+@media (min-width: 300px) and (max-width: 800px) {
+	#pagina .juego .juego-fila div {
+		display: inline-block;
+		border: 7px solid #ffffff;
+		margin: 5px;
+		height: 90px;
+		width: 90px;
+	}
+}
+
+@media (min-width: 100px) and (max-width: 300px) {
+	#pagina .juego .juego-fila div {
+		display: inline-block;
+		border: 7px solid #ffffff;
+		margin: 5px;
+		height: 50px;
+		width: 50px;
+	}
+}
