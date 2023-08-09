@@ -3,160 +3,187 @@ const nombre = document.getElementById("nombre");
 const formulario = document.querySelector("form");
 const botonesSimon = document.querySelectorAll(".boton-color");
 botonesSimon.forEach((botones) => {
-    botones.addEventListener("click", clickeo);
-    botones.addEventListener("mousedown", mouseDown);
-    botones.addEventListener("mouseup", mouseUp);
+	botones.addEventListener("click", clickeo);
+	botones.addEventListener("mousedown", mouseDown);
+	botones.addEventListener("mouseup", mouseUp);
 });
 var modoJugador = false;
 var timerTurno = null;
 var pasoJugador = 0;
 var puntajeJugador = 0;
 var puntaje = document.getElementById("puntaje");
-
+// modal
+const cerrarModal = document.getElementById("cerrarModal");
+const seguirJugando = document.getElementById("seguirJugando");
+const modal = document.getElementById("miModal");
 
 function clickeo(event) {
-    validarPasoJugador(event);
+	validarPasoJugador(event);
 }
 
 function mouseDown(event) {
-    botonPresionado(event);
+	botonPresionado(event);
 }
 
 function mouseUp(event) {
-    limpiarSecuenciaActual(event);
+	limpiarSecuenciaActual(event);
 }
 
 formulario.addEventListener("submit", function (event) {
-    event.preventDefault();
-    if (!formulario.checkValidity()) { //valida si el form es correcto
-        event.preventDefault(); //interrumpe el comportamiento del evento que se está ejecutando
-    } else {
-        formulario.reset();//reset del input
-        empezarJuego();
-    }
+	event.preventDefault();
+	if (!formulario.checkValidity()) {
+		//valida si el form es correcto
+		event.preventDefault(); //interrumpe el comportamiento del evento que se está ejecutando
+	} else {
+		formulario.reset(); //reset del input
+		empezarJuego();
+	}
 });
 
 nombre.addEventListener("input", function (event) {
-    console.log(nombre.value);
-    if (nombre.value.length >= 3) {
-        nombre.setCustomValidity("");
-    } else {
-        nombre.setCustomValidity("El nombre debe tener al menos tres letras");
-    }
+	console.log(nombre.value);
+	if (nombre.value.length >= 3) {
+		nombre.setCustomValidity("");
+	} else {
+		nombre.setCustomValidity("El nombre debe tener al menos tres letras");
+	}
 });
 
 function empezarJuego() {
-    secuencia = [];
-    puntaje.innerText = puntajeJugador;
-    turnoMaquina();
+	secuencia = [];
+	puntaje.innerText = puntajeJugador;
+	turnoMaquina();
 }
 
 function turnoMaquina() {
-    limpiarSeleccionJugador();
-    setTimeout(function () {
-        empezarSeleccionarColor(0);
-    }, 1000);
+	limpiarSeleccionJugador();
+	setTimeout(function () {
+		empezarSeleccionarColor(0);
+	}, 1000);
 }
 
 function limpiarSeleccionJugador() {
-    var botones = document.getElementsByClassName("boton-color");
+	var botones = document.getElementsByClassName("boton-color");
 
-    for (let index = 0; index < botones.length; index++) {
-        botones[index].classList.remove("modo-jugador");
-    }
+	for (let index = 0; index < botones.length; index++) {
+		botones[index].classList.remove("modo-jugador");
+	}
 }
 
 function empezarSeleccionarColor(pasoSecuencia) {
-    setTimeout(function () {
-        limpiarSecuenciaActual();
-        if (pasoSecuencia === secuencia.length) {
-            agregarPasoASecuencia();
-            hoverPasoSecuencia(pasoSecuencia);
+	setTimeout(function () {
+		limpiarSecuenciaActual();
+		if (pasoSecuencia === secuencia.length) {
+			agregarPasoASecuencia();
+			hoverPasoSecuencia(pasoSecuencia);
 
-            playerStep = 0;
+			pasoJugador = 0;
 
-            setTimeout(() => {
-                limpiarSecuenciaActual();
-                turnoJugador();
-            }, 1000);
-        }
-        else {
-            hoverPasoSecuencia(pasoSecuencia);
-            empezarSeleccionarColor(pasoSecuencia + 1);
-        }
-    }, 1000);
+			setTimeout(() => {
+				limpiarSecuenciaActual();
+				turnoJugador();
+			}, 1000);
+		} else {
+			hoverPasoSecuencia(pasoSecuencia);
+			empezarSeleccionarColor(pasoSecuencia + 1);
+		}
+	}, 1000);
 }
 
 function limpiarSecuenciaActual() {
-    var botones = document.getElementsByClassName("boton-color");
+	var botones = document.getElementsByClassName("boton-color");
 
-    for (let index = 0; index < botones.length; index++) {
-        botones[index].classList.remove("activo");
-    }
+	for (let index = 0; index < botones.length; index++) {
+		botones[index].classList.remove("activo");
+	}
 }
 
 function agregarPasoASecuencia() {
-    var max = 4;
-    var min = 1;
-    var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min);//random entre 4 nums(colores)
+	var max = 4;
+	var min = 1;
+	var nuevoPaso = Math.floor(Math.random() * (max - min + 1) + min); //random entre 4 nums(colores)
 
-    secuencia.push(nuevoPaso);
+	secuencia.push(nuevoPaso);
 }
 
 function hoverPasoSecuencia(pasoSecuencia) {
-    document.getElementById("boton-color-" + secuencia[pasoSecuencia]).classList.add("activo");
+	document
+		.getElementById("boton-color-" + secuencia[pasoSecuencia])
+		.classList.add("activo");
 
-    setTimeout(() => {
-        limpiarSecuenciaActual();
-    }, 500);
+	setTimeout(() => {
+		limpiarSecuenciaActual();
+	}, 500);
 }
 
 function validarPasoJugador(evento) {
-    if (!modoJugador) {
-        return;
-    }
+	if (!modoJugador) {
+		return;
+	}
 
-    clearTimeout(timerTurno);
+	clearTimeout(timerTurno);
 
-    var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
+	var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
 
-    if (secuencia[pasoJugador] !== botonPresionado) {
-        // TODO: mostrar modal
-        return;
-    }
+	if (secuencia[pasoJugador] !== botonPresionado) {
+		// TODO: mostrar modal
+		abrirModal();
+		return;
+	}
 
-    if (pasoJugador === secuencia.length - 1) {
-        modoJugador = false;
-        // acumulador puntaje usuario
-        puntajeJugador = puntajeJugador + 10;
-        puntaje.innerText = puntajeJugador.toString();
+	if (pasoJugador === secuencia.length - 1) {
+		modoJugador = false;
+		// acumulador puntaje usuario
+		puntajeJugador = puntajeJugador + 10;
+		puntaje.innerText = puntajeJugador.toString();
 
-        turnoMaquina();
-        return;
-    }
+		turnoMaquina();
+		return;
+	}
 
-    pasoJugador = pasoJugador + 1;
-    turnoJugador();
+	pasoJugador = pasoJugador + 1;
+	turnoJugador();
 }
 
 function turnoJugador() {
-    // pongo estilos del modo jugador
-    var botones = document.getElementsByClassName("boton-color");
+	// pongo estilos del modo jugador
+	var botones = document.getElementsByClassName("boton-color");
 
-    for (let index = 0; index < botones.length; index++) {
-        botones[index].classList.add("modo-jugador");
-    }
+	for (let index = 0; index < botones.length; index++) {
+		botones[index].classList.add("modo-jugador");
+	}
 
-    clearTimeout(timerTurno);
+	clearTimeout(timerTurno);
 
-    modoJugador = true;
-
+	modoJugador = true;
 }
 
 function botonPresionado(evento) {
-    if (!modoJugador) {
-        return;
-    }
+	if (!modoJugador) {
+		return;
+	}
 
-    evento.target.classList.add("activo");
+	evento.target.classList.add("activo");
+}
+
+// Cerrar el modal
+cerrarModal.addEventListener("click", function () {
+	modal.style.display = "none";
+	secuencia = [];
+	limpiarSeleccionJugador();
+});
+
+seguirJugando.addEventListener("click", function () {
+	modal.style.display = "none";
+	secuencia = [];
+	turnoMaquina();
+});
+
+function abrirModal() {
+	limpiarSecuenciaActual();
+	puntajeJugador = 0;
+	puntaje.innerText = puntajeJugador.toString();
+	clearTimeout(timerTurno);
+
+	modal.style.display = "block";
 }
