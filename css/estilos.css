@@ -2,19 +2,16 @@ body {
 	background-color: #f08080;
 	font-family: "Roboto", sans-serif;
 }
-
 #inicio {
 	display: flex;
 	flex-direction: column;
 	margin-top: 50px;
 	align-items: center;
 }
-
 #pagina {
 	display: block;
 	margin-top: 50px;
 }
-
 #pagina .juego {
 	display: flex;
 	flex-direction: column;
@@ -22,7 +19,6 @@ body {
 	width: 100%;
 	height: 100%;
 }
-
 #pagina .juego .juego-fila div {
 	display: inline-block;
 	border: 7px solid #ffffff;
@@ -30,48 +26,37 @@ body {
 	height: 120px;
 	width: 120px;
 }
-
 #pagina .juego .juego-fila div.modo-jugador:hover {
 	border-color: #ff0000;
 }
-
 #pagina .juego div#boton-color-1 {
 	background-color: #770101;
 }
-
 #pagina .juego div#boton-color-2 {
 	background-color: #015f01;
 }
-
 #pagina .juego div#boton-color-3 {
 	background-color: #020280;
 }
-
 #pagina .juego div#boton-color-4 {
 	background-color: #8d8d05;
 }
-
 #pagina .juego div#boton-color-1.activo {
 	background-color: #ff0000;
 }
-
 #pagina .juego div#boton-color-2.activo {
 	background-color: #00a700;
 }
-
 #pagina .juego div#boton-color-3.activo {
 	background-color: #0000ff;
 }
-
 #pagina .juego div#boton-color-4.activo {
 	background-color: #ffff00;
 }
-
 .centrado {
 	margin-top: 10px;
 	text-align: center;
 }
-
 footer {
 	display: flex;
 	flex-direction: column;
@@ -79,7 +64,6 @@ footer {
 	margin-top: 4em;
 	background-color: transparent;
 }
-
 footer div {
 	align-items: center;
 	margin: 40px;
@@ -87,7 +71,6 @@ footer div {
 	font-size: medium;
 	font-weight: bolder;
 }
-
 /* Estilos para el modal */
 .modal {
 	display: none;
@@ -106,39 +89,32 @@ footer div {
 	text-align: center;
 	box-shadow: 0px 0px 10px #00000080;
 }
-
 .margen-superior {
 	margin-top: 20px;
 }
-
 .texto-blanco {
 	color: #ffffff;
 }
-
 .contenedor {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 450px;
 }
-
 .contenido-contacto {
 	max-width: 800px;
 	padding: 20px;
 	box-shadow: 0 0 10px #0000001a;
 }
-
 #inicio h1 {
 	font-size: 40px;
 }
-
 @media (min-width: 300px) and (max-width: 800px) {
 	#pagina .juego .juego-fila div {
 		height: 90px;
 		width: 90px;
 	}
 }
-
 @media (min-width: 100px) and (max-width: 300px) {
 	#pagina .juego .juego-fila div {
 		height: 50px;
