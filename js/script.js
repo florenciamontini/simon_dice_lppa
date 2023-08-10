@@ -1,7 +1,7 @@
-"use strict";
+"use strict"; // Errores mas visibles
 var secuencia = [];
 var nombre = document.getElementById("nombre");
-var formulario = document.querySelector("form");
+var formulario = document.querySelector("form"); // querySelector devuelve el primer elemento del documento
 var botonesSimon = document.querySelectorAll(".boton-color");
 botonesSimon.forEach(function (botones) {
 	botones.addEventListener("click", clickeo);
@@ -29,16 +29,7 @@ function mouseUp(event) {
 	limpiarSecuenciaActual(event);
 }
 
-formulario.addEventListener("submit", function (event) {
-	event.preventDefault();
-	if (!formulario.checkValidity()) {
-		event.preventDefault();
-	} else {
-		formulario.reset();
-		empezarJuego();
-	}
-});
-
+// Validacion nombre inicial antes de comenzar **
 nombre.addEventListener("input", function (event) {
 	console.log(nombre.value);
 	if (nombre.value.length >= 3) {
@@ -48,13 +39,28 @@ nombre.addEventListener("input", function (event) {
 	}
 });
 
+// Submit - Valido que el formulario de nombre no este vacío y cumpla con al menos tres letras
+formulario.addEventListener("submit", function (event) {
+	event.preventDefault(); // Evita que la pag se recargue
+	if (!formulario.checkValidity()) {
+		event.preventDefault();
+	} else {
+		// Reseteo formulario y arranca el juego
+		formulario.reset();
+		empezarJuego();
+	}
+});
+
 function empezarJuego() {
+	// Inicializo secuencia vacía y activo el puntaje jugador
 	secuencia = [];
 	puntaje.innerText = puntajeJugador;
 	turnoMaquina();
 }
 
+// Arranca el turno máquina
 function turnoMaquina() {
+	// Limpio la seleccion del jugador, limpio estilo de cada boton
 	limpiarSeleccionJugador();
 	setTimeout(function () {
 		empezarSeleccionarColor(0);
@@ -62,22 +68,25 @@ function turnoMaquina() {
 }
 
 function limpiarSeleccionJugador() {
-	var botones = document.getElementsByClassName("boton-color");
+	var botones = document.getElementsByClassName("boton-color"); //Obtiene todos los elementos de la clase boton-color
 	for (var index = 0; index < botones.length; index++) {
-		botones[index].classList.remove("modo-jugador");
+		// Itera en los elementos
+		botones[index].classList.remove("modo-jugador"); // Elimina la clase modo-jugador de cada elemento (quita el hover)
 	}
 }
 
 function empezarSeleccionarColor(pasoSecuencia) {
+	// Paso secuencia es el indice
 	setTimeout(function () {
 		limpiarSecuenciaActual();
 		if (pasoSecuencia === secuencia.length) {
-			agregarPasoASecuencia();
-			hoverPasoSecuencia(pasoSecuencia);
-			pasoJugador = 0;
+			// Evaluo si el paso de la secuencia es el ultimo iluminado
+			agregarPasoASecuencia(); // Como es el ultimo, agrego un color mas a la secuencia
+			hoverPasoSecuencia(pasoSecuencia); // Ilumina los colores de la secuencia
+			pasoJugador = 0; // Reseteo el paso del jugador para que arranque desde cero
 			setTimeout(function () {
-				limpiarSecuenciaActual();
-				turnoJugador();
+				limpiarSecuenciaActual(); // Se asegura de eliminar el active de los botones (luz)
+				turnoJugador(); // Activa modo jugador
 			}, 1000);
 		} else {
 			hoverPasoSecuencia(pasoSecuencia);
@@ -92,7 +101,7 @@ function limpiarSecuenciaActual() {
 		botones[index].classList.remove("activo");
 	}
 }
-
+// Metodo para elegir color al azar y pushearlo dentro de la secuencia
 function agregarPasoASecuencia() {
 	var max = 4;
 	var min = 1;
@@ -110,23 +119,26 @@ function hoverPasoSecuencia(pasoSecuencia) {
 }
 
 function validarPasoJugador(evento) {
+	// Valido cada paso del jugador para ver si la secuencia fue correcta
 	if (!modoJugador) {
 		return;
 	}
 	clearTimeout(timerTurno);
-	var botonPresionado = parseInt(evento.target.id.replace("boton-color-", ""));
+	var botonPresionado = parseInt(evento.target.id.replace("boton-color-", "")); // Se obtiene qué color presionó el usuario
 	if (secuencia[pasoJugador] !== botonPresionado) {
+		// Valida si el boton presionado es igual al que la maquina eligió
 		abrirModal();
 		return;
 	}
 	if (pasoJugador === secuencia.length - 1) {
-		modoJugador = false;
+		// Valido si es el final de la secuencia
+		modoJugador = false; // Es turno de la maquina
 		puntajeJugador = puntajeJugador + 100;
 		puntaje.innerText = puntajeJugador.toString();
 		turnoMaquina();
 		return;
 	}
-	pasoJugador = pasoJugador + 1;
+	pasoJugador = pasoJugador + 1; // Incremento del paso del jugador para validar siguiente paso
 	turnoJugador();
 }
 
@@ -161,7 +173,7 @@ seguirJugando.addEventListener("click", function () {
 function abrirModal() {
 	limpiarSecuenciaActual();
 	puntajeJugador = 0;
-	puntaje.innerText = puntajeJugador.toString();
+	puntaje.innerText = puntajeJugador.toString(); // Asigno en html el valor del puntaje = 0
 	clearTimeout(timerTurno);
 	modal.style.display = "block";
 }

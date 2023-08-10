@@ -1,11 +1,11 @@
-"use strict";
+"use strict"; // Errores mas visibles
 
-// Formulario de contacto
+// Variables formulario de contacto
 var nombreContacto = document.getElementById("nombreContacto");
 var email = document.getElementById("email");
 var mensaje = document.getElementById("mensaje");
 
-// validacion formulario de contacto
+// Validacion formulario de contacto
 email.addEventListener("input", function (event) {
 	console.log(email.value);
 	if (validarEmail(email)) {
