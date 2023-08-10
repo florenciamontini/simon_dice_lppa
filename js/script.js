@@ -9,7 +9,6 @@ botonesSimon.forEach(function (botones) {
 	botones.addEventListener("mouseup", mouseUp);
 });
 var modoJugador = false;
-var timerTurno = null;
 var pasoJugador = 0;
 var puntajeJugador = 0;
 var puntaje = document.getElementById("puntaje");
@@ -47,6 +46,8 @@ formulario.addEventListener("submit", function (event) {
 	} else {
 		// Reseteo formulario y arranca el juego
 		formulario.reset();
+		puntajeJugador = 0;
+		puntaje.innerText = puntajeJugador.toString();
 		empezarJuego();
 	}
 });
@@ -123,7 +124,6 @@ function validarPasoJugador(evento) {
 	if (!modoJugador) {
 		return;
 	}
-	clearTimeout(timerTurno);
 	var botonPresionado = parseInt(evento.target.id.replace("boton-color-", "")); // Se obtiene qué color presionó el usuario
 	if (secuencia[pasoJugador] !== botonPresionado) {
 		// Valida si el boton presionado es igual al que la maquina eligió
@@ -147,7 +147,6 @@ function turnoJugador() {
 	for (var index = 0; index < botones.length; index++) {
 		botones[index].classList.add("modo-jugador");
 	}
-	clearTimeout(timerTurno);
 	modoJugador = true;
 }
 
@@ -174,6 +173,5 @@ function abrirModal() {
 	limpiarSecuenciaActual();
 	puntajeJugador = 0;
 	puntaje.innerText = puntajeJugador.toString(); // Asigno en html el valor del puntaje = 0
-	clearTimeout(timerTurno);
 	modal.style.display = "block";
 }
